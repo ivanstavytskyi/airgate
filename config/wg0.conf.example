@@ -1,0 +1,28 @@
+# WireGuard client template for the gateway VM.
+#
+# Use this if you prefer plain wg-quick over the AmneziaVPN GUI (see docs/hardening.md).
+# Import the same file into AmneziaVPN via "File with connection settings" if you use the GUI.
+#
+# Install on gateway:
+#   apt install wireguard
+#   cp wg0.conf.example /etc/wireguard/wg0.conf && chmod 600 /etc/wireguard/wg0.conf
+#   systemctl enable --now wg-quick@wg0
+# and set VPN_IFACE="wg0" in scripts/config.env.
+#
+# NEVER commit a real config: private keys and endpoints belong to you only.
+
+[Interface]
+PrivateKey = <CLIENT_PRIVATE_KEY>
+Address = 10.2.0.2/32
+# DNS handed to the gateway itself while the tunnel is up.
+# The sandbox uses the DNS from scripts/config.env, reached through the tunnel.
+DNS = 1.1.1.1
+
+[Peer]
+PublicKey = <SERVER_PUBLIC_KEY>
+# Optional, if your server uses it:
+# PresharedKey = <PRESHARED_KEY>
+Endpoint = <SERVER_IP_OR_HOST>:51820
+# Route everything (IPv4 and IPv6) into the tunnel.
+AllowedIPs = 0.0.0.0/0, ::/0
+PersistentKeepalive = 25

@@ -1,0 +1,27 @@
+#!/usr/sbin/nft -f
+# Gateway kill-switch ruleset (rendered with the default values from scripts/config.env).
+#
+#   ens37 = LAN segment "sandbox-lan" (towards the sandbox VM)
+#   amn0  = VPN tunnel interface (AmneziaVPN). For wg-quick use "wg0".
+#   ens33 = VMware NAT uplink - intentionally NOT referenced: nothing may be forwarded there.
+#
+# Install:  cp nftables.conf.example /etc/nftables.conf && nft -c -f /etc/nftables.conf && systemctl enable --now nftables
+flush ruleset
+
+table inet filter {
+    chain forward {
+        type filter hook forward priority 0; policy drop;
+
+        # sandbox -> tunnel
+        iifname "ens37" oifname "amn0" accept
+        # tunnel -> sandbox, replies only
+        iifname "amn0" oifname "ens37" ct state established,related accept
+    }
+}
+
+table ip nat {
+    chain postrouting {
+        type nat hook postrouting priority 100;
+        oifname "amn0" masquerade
+    }
+}
