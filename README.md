@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="images/airgate.png" alt="Airgate — disposable sandbox lab with a VPN gateway kill-switch" width="480">
+
 # Disposable Sandbox Gateway
 
 **A throwaway lab on your own computer that can't leak your IP address.**
@@ -459,8 +461,8 @@ Repository layout:
 ├── README.md
 ├── LICENSE                         MIT
 ├── docs/                           the four documents above
-├── images/                         screenshots, prefixed by step: 00-veracrypt, 01-vm, 02-net, 03-vpn, 05-verify
-│   └── diagrams/                   diagrams, light and dark variants
+├── images/                         airgate.png (header), setup screenshots, diagram PNGs
+│   └── diagrams/                   architecture diagrams, light and dark variants
 ├── scripts/
 │   ├── config.env                  interfaces, subnet, DNS — the only file you should need to edit
 │   ├── gateway/setup-gateway.sh    forwarding, nftables, static LAN address, DNS pin
