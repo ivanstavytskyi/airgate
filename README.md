@@ -1,12 +1,12 @@
 <div align="center">
 
-<img src="images/airgate.png" alt="Airgate — disposable sandbox lab with a VPN gateway kill-switch" width="480">
-
 # Disposable Sandbox Gateway
 
 **A throwaway lab on your own computer that can't leak your IP address.**
 
 Two VMware virtual machines. One is where you work. The other is a small router that only lets traffic out through an encrypted tunnel. If the tunnel drops, the sandbox goes offline instead of falling back to your real connection.
+
+<img width="1774" height="887" alt="airgate" src="https://github.com/user-attachments/assets/79a9b457-97b4-432a-a6bf-eac25c63645f" />
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 ![Platform](https://img.shields.io/badge/platform-VMware%20Workstation-607078)
